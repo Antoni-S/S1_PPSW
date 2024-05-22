@@ -28,8 +28,9 @@ struct Servo {
 
 struct Servo sServo;
 
+
 void Automat() {
-	unsigned char ucOffset = 12;
+	
 	switch(sServo.eState) {
 		case CALLIB:
 			if(eReadDetector() == ACTIVE) {
@@ -41,7 +42,7 @@ void Automat() {
 			}
 			break;
 		case OFFSET:
-			if(sServo.uiCurrentPosition == ucOffset) {
+			if(sServo.uiCurrentPosition == 12) {
 				sServo.uiCurrentPosition = 0;
 				sServo.uiDesiredPostion = 0;
 				sServo.eState = IDLE;
@@ -75,6 +76,7 @@ void Automat() {
 
 void ServoInit(unsigned int uiServoFrequency) {
 	uiServoFrequency = (1000000/uiServoFrequency);
+	DetectorInit();
 	LedInit();
 	sServo.eState = CALLIB;
 	Timer0Interrupts_Init(uiServoFrequency, &Automat);
@@ -87,4 +89,6 @@ void ServoCallib(void) {
 
 void ServoGoTo(unsigned int uiPosition) {
 	sServo.uiDesiredPostion = uiPosition;
+	sServo.eState = IN_PROGRESS;
+	while(sServo.eState == IN_PROGRESS) {};
 }

@@ -5,9 +5,9 @@
 int main (){
 	enum KeyboardState eKeyboardState;
 	KeyboardInit();
-	DetectorInit();
-	ServoInit(4);
-	
+	ServoInit(8);
+	ServoGoTo(24);
+	ServoGoTo(12);
 
 	while(1){
 		eKeyboardState = eKeyboardRead();
