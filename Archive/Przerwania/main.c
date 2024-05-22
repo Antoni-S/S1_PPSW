@@ -34,7 +34,7 @@ void Automat() {
 			LedStepRight();
 			break;
 	}
-}
+}// gittest
 
 int main (){
 	unsigned int iMainLoopCtr;
