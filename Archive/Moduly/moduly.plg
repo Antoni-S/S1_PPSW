@@ -1,0 +1,20 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\student\Desktop\SusPPSW\Current\moduly.uvproj
+Project File Date:  04/17/2024
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling Startup.s...
+compiling main.c...
+compiling led.c...
+compiling keyboard.c...
+linking...
+Program Size: Code=1312 RO-data=32 RW-data=4 ZI-data=1260  
+FromELF: creating hex file...
+".\moduly.axf" - 0 Errors, 0 Warning(s).
+Clean started: Project: 'moduly'
+   deleting intermediate output files for target 'Target 1'
