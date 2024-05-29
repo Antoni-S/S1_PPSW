@@ -15,16 +15,11 @@ int main() {
 				ServoGoTo(uiPosition);
 				uiPosition += 12;
 				break;
-			case '2':
-				ServoGoTo(24);
-				break;
-			case '3':
-				ServoGoTo(36);
-				break;
-			case '4':
-				break;
 			case 'c':
 				ServoCallib();
+				uiPosition = 12;
+				break;
+			default:
 				break;
 		}
 		cOdebranyZnak = 0;
