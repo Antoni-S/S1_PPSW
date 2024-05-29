@@ -18,7 +18,7 @@ enum DetectorState eReadDetector(void) {
 	return INACTIVE;
 }
 
-enum ServoState {CALLIB, IDLE, IN_PROGRESS};
+enum ServoState {CALLIB, OFFSET, IDLE, IN_PROGRESS};
 
 struct Servo {
 	enum ServoState eState;
@@ -28,9 +28,29 @@ struct Servo {
 
 struct Servo sServo;
 
-void Automat() {
 
+void Automat() {
+	
 	switch(sServo.eState) {
+		case CALLIB:
+			if(eReadDetector() == ACTIVE) {
+				sServo.uiCurrentPosition = 0;
+				sServo.eState = OFFSET;
+			} else {
+				LedStepLeft();
+				sServo.eState = CALLIB;
+			}
+			break;
+		case OFFSET:
+			if(sServo.uiCurrentPosition == 12) {
+				sServo.uiCurrentPosition = 0;
+				sServo.uiDesiredPostion = 0;
+				sServo.eState = IDLE;
+			} else {
+				LedStepLeft();
+				sServo.uiCurrentPosition += 1;
+			}
+			break;
 		case IDLE:
 			if(sServo.uiCurrentPosition == sServo.uiDesiredPostion) {
 				sServo.eState = IDLE;
@@ -39,25 +59,16 @@ void Automat() {
 			}
 			break;
 		case IN_PROGRESS:
-			if(sServo.uiCurrentPosition < sServo.uiDesiredPostion) {
-				LedStepRight();
-				sServo.uiCurrentPosition += 1;
-			} else if(sServo.uiCurrentPosition > sServo.uiDesiredPostion) {
-				LedStepLeft();
-				sServo.uiCurrentPosition -= 1;
-			} else {
-				sServo.eState = IDLE;
-			}
-			break;
-		case CALLIB:
-			if(eReadDetector() == INACTIVE) {
-				LedStepLeft();
-			} else if(eReadDetector() == ACTIVE) {
-				sServo.uiCurrentPosition = 0;
-				sServo.uiDesiredPostion = 0;
+			if(sServo.uiCurrentPosition == sServo.uiDesiredPostion) {
 				sServo.eState = IDLE;
 			} else {
-				sServo.eState = CALLIB;
+				if(sServo.uiCurrentPosition < sServo.uiDesiredPostion) {
+					LedStepRight();
+					sServo.uiCurrentPosition += 1;
+				} else {
+					LedStepLeft();
+					sServo.uiCurrentPosition -= 1;
+				}
 			}
 			break;
 	}
@@ -65,6 +76,7 @@ void Automat() {
 
 void ServoInit(unsigned int uiServoFrequency) {
 	uiServoFrequency = (1000000/uiServoFrequency);
+	DetectorInit();
 	LedInit();
 	sServo.eState = CALLIB;
 	Timer0Interrupts_Init(uiServoFrequency, &Automat);
@@ -77,4 +89,6 @@ void ServoCallib(void) {
 
 void ServoGoTo(unsigned int uiPosition) {
 	sServo.uiDesiredPostion = uiPosition;
+	sServo.eState = IN_PROGRESS;
+	while(sServo.eState == IN_PROGRESS) {};
 }

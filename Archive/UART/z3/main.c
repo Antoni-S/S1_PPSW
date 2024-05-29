@@ -4,7 +4,6 @@
 
 int main() {
 	extern char cOdebranyZnak;
-	unsigned int uiPosition = 12;
 	enum KeyboardState eKeyboardState;
 	KeyboardInit();
 	ServoInit(8);
@@ -12,8 +11,7 @@ int main() {
 	while (1) {
 		switch(cOdebranyZnak) {
 			case '1':
-				ServoGoTo(uiPosition);
-				uiPosition += 12;
+				ServoGoTo(12);
 				break;
 			case '2':
 				ServoGoTo(24);
@@ -27,7 +25,6 @@ int main() {
 				ServoCallib();
 				break;
 		}
-		cOdebranyZnak = 0;
 		eKeyboardState = eKeyboardRead();
 		switch(eKeyboardState) {
 				case BUTTON_0:
