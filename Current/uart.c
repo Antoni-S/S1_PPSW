@@ -1,6 +1,7 @@
 #include <LPC210X.H>
 #include "uart.h"
 
+#define NULL 0x00
 /************ UART ************/
 //PINSEL0
 #define RxD0_bm 0x00000004
@@ -17,7 +18,9 @@
 #define mINTERRUPT_PENDING_IDETIFICATION_BITFIELD  0x0000000F
 #define mTHRE_INTERRUPT_PENDING                    0x00000002
 #define mRX_DATA_AVALIABLE_INTERRUPT_PENDING       0x00000004
-
+/************ Odbior znakow *******/
+#define TERMINATOR '\r'
+#define RECIEVER_SIZE 4
 /************ Interrupts **********/
 // VIC (Vector Interrupt Controller) channels
 #define VIC_UART0_CHANNEL_NR  6
@@ -63,4 +66,33 @@ void UART_InitWithInt(unsigned int uiBaudRate){
    VICVectAddr2  = (unsigned long) UART0_Interrupt;             // set interrupt service routine address
    VICVectCntl2  = mIRQ_SLOT_ENABLE | VIC_UART0_CHANNEL_NR;     // use it for UART 0 Interrupt
    VICIntEnable |= (0x1 << VIC_UART0_CHANNEL_NR);               // Enable UART 0 Interrupt Channel
+}
+/************** ODBIOR ZNAKOW ******************/
+enum eRecieverStatus {EMPTY, READY, OVERFLOW};
+
+struct RecieverBuffer { 
+	char cData[RECIEVER_SIZE];
+	unsigned char ucCharCtr;
+	enum eRecieverStatus eStatus;
+};
+
+struct RecieverBuffer sReceiverBuffer;
+
+void Reciever_PutCharacterToBuffer(char cCharacter) {
+	
+		char cCharCtr = 0;
+		
+		if(cCharCtr > RECIEVER_SIZE) {
+			
+		} else {
+			sReceiverBuffer.cData[cCharCtr] = NULL;
+		}
+}
+
+enum eRecieverStatus eReciever_GetStatus(void) {
+
+}
+
+void Reciever_GetStringCopy(char *ucDestination) {
+
 }
