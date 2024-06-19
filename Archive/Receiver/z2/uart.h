@@ -1,4 +1,4 @@
-#define RECEIVER_SIZE 20
+#define RECEIVER_SIZE 10
 enum eReceiverStatus {EMPTY, READY, OVERFLOW};
 
 void UART_InitWithInt(unsigned int uiBaudRate);

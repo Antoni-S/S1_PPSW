@@ -432,16 +432,6 @@
               <FileType>1</FileType>
               <FilePath>.\timer_interrupts.c</FilePath>
             </File>
-            <File>
-              <FileName>konwersje.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\konwersje.c</FilePath>
-            </File>
-            <File>
-              <FileName>dekodowanie.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\dekodowanie.c</FilePath>
-            </File>
           </Files>
         </Group>
       </Groups>

@@ -78,7 +78,3 @@ void ServoCallib(void) {
 void ServoGoTo(unsigned int uiPosition) {
 	sServo.uiDesiredPostion = uiPosition;
 }
-
-void ServoShift(unsigned int uiPosition) {
-	sServo.uiDesiredPostion = sServo.uiCurrentPosition + uiPosition;
-}
