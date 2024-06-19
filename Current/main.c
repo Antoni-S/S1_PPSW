@@ -17,26 +17,15 @@ int main() {
 		if(eReceiver_GetStatus() == READY) {
 			Receiver_GetStringCopy(cDestination);
 			DecodeMsg(cDestination);
-			if(ucTokenNr != 0 && asToken[0].eType == KEYWORD) {
-				/*
-				if(eCompareString(asToken[0].uValue.pcString, "callib") == EQUAL) {
-					ServoCallib();
-				}
-				else if(eCompareString(asToken[0].uValue.pcString, "goto") == EQUAL) {
-					ServoGoTo(asToken[1].uValue.uiNumber);
-				}
-				else if(eCompareString(asToken[0].uValue.pcString, "shift") == EQUAL) {
-					ServoShift(asToken[1].uValue.uiNumber);
-				}
-			*/
+			if(ucTokenNr != 0 && asToken[0].eType == KEYWORD) {				
 				switch(asToken[0].uValue.eKeyword) {
-					case CL:
+					case CALLIB:
 						ServoCallib();
 						break;
-					case GT:
+					case GOTO:
 						ServoGoTo(asToken[1].uValue.uiNumber);
 						break;
-					case SH:
+					case SHIFT:
 						ServoShift(asToken[1].uValue.uiNumber);
 						break;
 				}

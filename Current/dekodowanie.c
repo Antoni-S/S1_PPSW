@@ -9,9 +9,9 @@ typedef struct Keyword {
 } Keyword;
 
 struct Keyword asKeywordList[MAX_KEYWORD_NR] = {
-	{CL, "callib"},
-	{GT, "goto"},
-	{SH, "shift"}
+	{CALLIB, "callib"},
+	{GOTO, "goto"},
+	{SHIFT, "shift"}
 };
 
 unsigned char ucTokenNr;
@@ -73,20 +73,21 @@ enum Result eStringToKeyword (char pcStr[], enum KeywordCode *peKeywordCode) {
 
 void DecodeTokens(void) {
 	
+	struct Token *psCurrentToken;
 	unsigned char ucTokenCounter;
-	//unsigned int uiTokenValue;
-	//enum KeywordCode eTokenCode;
+	unsigned int uiTokenValue;
+	enum KeywordCode eTokenCode;
 	
 	for(ucTokenCounter = 0; ucTokenCounter < ucTokenNr; ucTokenCounter++) {
-
-		if(eStringToKeyword(asToken[ucTokenCounter].uValue.pcString, &asToken[ucTokenCounter].uValue.eKeyword) == OK) {
-			asToken[ucTokenCounter].eType = KEYWORD;
-			//asToken[ucTokenCounter].uValue.eKeyword = eTokenCode;
-		} else if(eHexStringToUInt(asToken[ucTokenCounter].uValue.pcString, &asToken[ucTokenCounter].uValue.uiNumber) == OK) {
-			asToken[ucTokenCounter].eType = NUMBER;
-			//asToken[ucTokenCounter].uValue.uiNumber = uiTokenValue;
+		psCurrentToken = &asToken[ucTokenCounter];
+		if(eStringToKeyword(psCurrentToken -> uValue.pcString, &eTokenCode) == OK) {
+			psCurrentToken -> eType = KEYWORD;
+			psCurrentToken -> uValue.eKeyword = eTokenCode;
+		} else if(eHexStringToUInt(psCurrentToken -> uValue.pcString, &uiTokenValue) == OK) {
+			psCurrentToken -> eType = NUMBER;
+			psCurrentToken -> uValue.uiNumber = uiTokenValue;
 		} else {
-			asToken[ucTokenCounter].eType = STRING;
+			psCurrentToken -> eType = STRING;
 		}
 	}
 }
