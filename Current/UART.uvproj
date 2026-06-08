@@ -398,11 +398,6 @@
               <FilePath>.\Startup.s</FilePath>
             </File>
             <File>
-              <FileName>dekodowanie.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\dekodowanie.c</FilePath>
-            </File>
-            <File>
               <FileName>keyboard.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\keyboard.c</FilePath>
@@ -423,19 +418,9 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>servo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\servo.c</FilePath>
-            </File>
-            <File>
               <FileName>string.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\string.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\timer.c</FilePath>
             </File>
             <File>
               <FileName>timer_interrupts.c</FileName>
@@ -446,6 +431,16 @@
               <FileName>uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>command_decoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\command_decoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>serwo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\serwo.c</FilePath>
             </File>
           </Files>
         </Group>

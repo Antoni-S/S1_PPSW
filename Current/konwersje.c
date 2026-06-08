@@ -1,6 +1,5 @@
 #define Null '\0'
-
-enum Result {OK, ERROR};
+#include "konwersje.h"
 
 
 void UIntToHexStr(unsigned int uiValue, char pcStr[]) {
