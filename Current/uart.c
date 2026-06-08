@@ -106,10 +106,10 @@ char Transmiter_GetCharacterFromBuffer(void){
 void Transmiter_SendString(char cString[]){
     
     CopyString(cString, sTransmiterBuffer.cData);
-    U0THR = Transmiter_GetCharacterFromBuffer();
     sTransmiterBuffer.eStatus = BUSY;
     sTransmiterBuffer.cCharCtr = 0;
     sTransmiterBuffer.fLastCharacter = 0;
+		U0THR = Transmiter_GetCharacterFromBuffer();
     
 }
 

@@ -1,5 +1,6 @@
 #include <LPC21xx.H>
 #include "led.h"
+#include "timer_interrupts.h"
 
 // TIMER
 #define mCOUNTER_ENABLE 0x00000001
